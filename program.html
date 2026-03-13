@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Программа курса | SENSEI CNC</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>匠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@200..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
+</head>
+
+<body>
+    <div class="techno-bg"></div>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-kanji">匠</span>
+            <span class="logo-text">
+                <span class="logo-name">SENSEI</span>
+                <span class="logo-sub">CNC</span>
+            </span>
+        </a>
+        <nav class="nav">
+            <a href="index.html#about">О курсе</a>
+            <a href="program.html" class="active">Программа</a>
+            <a href="schedule.html">Расписание</a>
+            <a href="about.html">Об авторе</a>
+            <a href="contacts.html">Контакты</a>
+            <div class="theme-toggle" id="themeToggle">
+                <span class="toggle-icon">☀</span>
+            </div>
+            <a href="#" class="btn btn-primary" id="loginBtn">Войти</a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-30">
+        <section class="section">
+            <div class="container">
+                <h1 class="page-title">Полная программа курса</h1>
+                <p class="page-subtitle">От ручного программирования G-кодов до CAD/CAM моделирования.</p>
+
+                <div class="program-details">
+                    <!-- Week 1 -->
+                    <div class="week-block">
+                        <h2 class="week-title">НЕДЕЛЯ 1: Базовая усиленная (Ручное программирование G-code)</h2>
+                        <p class="week-focus">Фокус: Железобетонная база, безопасность, циклы, понимание логики стойки.
+                        </p>
+
+                        <div class="day-list">
+                            <div class="day-item">
+                                <h3>День 1. Структура программы и Культура производства</h3>
+                                <p><strong>Слушатель осваивает:</strong> Как начинать и заканчивать программу так, чтобы
+                                    гарантированно не разбить станок. Безопасный алгоритм действий.</p>
+                                <ul>
+                                    <li>Шапка безопасности: Разбираем строку безопасности (G40 G80 G99 G21).</li>
+                                    <li>Ограничение оборотов: G50 vs G96 (Постоянная скорость резания).</li>
+                                    <li>Подходы и отходы: Правило "Г". Сначала Z, потом X, или безопасная диагональ.
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 2. Геометрия и Компенсация радиуса (G41/G42)</h3>
+                                <p><strong>Слушатель осваивает:</strong> Программирование чистового контура с фасками и
+                                    радиусами, используя чертежные размеры.</p>
+                                <ul>
+                                    <li>G41/G42: Рисуем схему "Человечек идет по контуру".</li>
+                                    <li>Вектор входа: Объясняем, почему нельзя включать компенсацию в теле детали.</li>
+                                    <li>Упрощенное программирование: Использование ,C (фаска) и ,R (радиус).</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 3. Черновые циклы (G71, G70) — "Хлеб наладчика"</h3>
+                                <p><strong>Слушатель осваивает:</strong> Методы быстрого съема больших припусков без
+                                    расписывания каждого прохода.</p>
+                                <ul>
+                                    <li>Разбор цикла G71 (Type I и Type II — карманы).</li>
+                                    <li>Расшифровка параметров: глубина, отскок, припуски.</li>
+                                    <li>Типичная ошибка: Монотонность контура в G71 Type I.</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 4. Сверление и Нарезание резьбы (Токарная группа)</h3>
+                                <p><strong>Слушатель осваивает:</strong> Обработку осевых отверстий и нарезание резьбы
+                                    резцом (внешней/внутренней).</p>
+                                <ul>
+                                    <li>Сверление: G74 (торцевая канавка/сверление с отскоком) или G83.</li>
+                                    <li>Резьба G76: Разбираем первую и вторую строки.</li>
+                                    <li>Таблицы резьб: Как считать высоту профиля.</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 5. Основы фрезерования на токарном (Приводной инструмент)</h3>
+                                <p><strong>Слушатель осваивает:</strong> Управление осью C и приводными блоками для
+                                    выполнения фрезерных операций.</p>
+                                <ul>
+                                    <li>Активация оси C (M code, G28 H0). Тормоз шпинделя.</li>
+                                    <li>Полярная интерполяция (G12.1): "Магия", превращающая C-X в X-Y.</li>
+                                    <li>Сверление на торце (G83) и на диаметре (G87).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="week-block mt-20">
+                        <h2 class="week-title">НЕДЕЛЯ 2: Закрепление + CAD/CAM (SolidWorks + SolidCAM)</h2>
+                        <p class="week-focus">Фокус: Переход от "калькулятора в голове" к современным методам. Скорость
+                            и сложные формы.</p>
+
+                        <div class="day-list">
+                            <div class="day-item">
+                                <h3>День 6. Практикум "Стойка" (Закрепление 1 недели)</h3>
+                                <p><strong>Слушатель осваивает:</strong> Связывание разрозненных знаний в единую
+                                    технологию. Подпрограммы.</p>
+                                <ul>
+                                    <li>Подпрограммы M98/M99: Зачем нужны?</li>
+                                    <li>Работа с локальной системой координат (G54-G59 и G50 W-...).</li>
+                                    <li>Выявление ошибок в коде: "Почему здесь зарежет?", "Почему здесь останется
+                                        бобышка?".</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 7. Введение в CAD (SolidWorks) — Моделирование для токаря</h3>
+                                <p><strong>Слушатель осваивает:</strong> Построение 3D-модели детали по чертежу.</p>
+                                <ul>
+                                    <li>Эскиз (Sketch): Рисуем половину контура детали. Размеры и взаимосвязи.</li>
+                                    <li>Повернутая бобышка (Revolve): Получение тела вращения.</li>
+                                    <li>Добавление элементов: Отверстия, фаски (Chamfer), скругления (Fillet).</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 8. Введение в CAM (SolidCAM) — Токарная обработка</h3>
+                                <p><strong>Слушатель осваивает:</strong> Создание проекта обработки и выбор
+                                    технологической базы.</p>
+                                <ul>
+                                    <li>Создание проекта: Выбор постпроцессора (Fanuc Turn).</li>
+                                    <li>Заготовка (Stock): Задаем цилиндр с припуском.</li>
+                                    <li>Операция "Точение" (Turning): Выбор геометрии и инструмента. Визуализация
+                                        (SolidVerify).</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 9. CAM для фрезерных операций на токарном станке</h3>
+                                <p><strong>Слушатель осваивает:</strong> Фрезеровку лысок, пазов и сверление отверстий
+                                    на цилиндре/торце через CAM.</p>
+                                <ul>
+                                    <li>Торцевое фрезерование (Face Mill).</li>
+                                    <li>Сверление (Drilling): Распознавание отверстий.</li>
+                                    <li>Обработка кармана/контура на цилиндрической поверхности (ось C).</li>
+                                </ul>
+                            </div>
+
+                            <div class="day-item">
+                                <h3>День 10. Финал. Анализ G-кода из CAM и Отладка</h3>
+                                <p><strong>Слушатель осваивает:</strong> Критический анализ машинного кода и проверку УП
+                                    глазами опытного наладчика.</p>
+                                <ul>
+                                    <li>Сравнение сгенерированного кода с "ручным".</li>
+                                    <li>Чек-лист проверки УП перед запуском.</li>
+                                    <li>Правильный ли номер инструмента? Ограничение оборотов? Тормоз оси C?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-btn mt-20">
+                    <a href="#" class="btn btn-sakura">Записаться на курс</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AUTH MODAL -->
+    <div id="authModal" class="auth-modal-overlay" aria-hidden="true">
+        <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+            <button class="auth-modal-close" id="authModalClose" aria-label="Закрыть">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="auth-modal-kanji" aria-hidden="true">匠</div>
+            <h2 class="auth-modal-title" id="authModalTitle">Вход в кабинет</h2>
+            <p class="auth-modal-subtitle">Введите ваш email — мы пришлём ссылку для входа</p>
+            <form class="auth-form" id="authForm" novalidate>
+                <div class="vanish-input-container">
+                    <input type="email" id="authEmail" class="vanish-input" autocomplete="email" required>
+                    <canvas id="vanishCanvas" class="vanish-canvas"></canvas>
+                    <span class="vanish-placeholder" id="vanishPlaceholder"></span>
+                    <button type="submit" class="vanish-submit-btn" id="authSubmitBtn" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+            <div class="auth-success" id="authSuccess" hidden>
+                <div class="auth-success-icon">✉️</div>
+                <p class="auth-success-title">Письмо отправлено!</p>
+                <p class="auth-success-text">Проверьте почту и перейдите по ссылке в письме. Ссылка действует 1 час.</p>
+            </div>
+            <div class="auth-divider"><span>Нет доступа?</span></div>
+            <p class="auth-note">Доступ к урокам выдаётся после оплаты курса. <a href="contacts.html">Связаться с
+                    автором →</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-kanji">匠</span>
+                <span>SENSEI CNC © 2026</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://t.me/+Jj6Uy-wDMfk1NGIy" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a href="https://vk.com/club228382060" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+                <a href="https://www.youtube.com/@Vladimir.rabota.vahta-cnc" target="_blank"
+                    rel="noopener noreferrer">YouTube</a>
+                <a href="https://max.ru/join/Tf6cZFKwXug4Sc4m2DnWaq3ucq9xrQ-Hix-pyVq8J2o" target="_blank"
+                    rel="noopener noreferrer">MAX</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="auth.js?v=2"></script>
+    <script src="main.js?v=2"></script>
+</body>
+
+</html>

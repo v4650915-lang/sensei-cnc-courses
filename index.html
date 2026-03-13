@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENSEI CNC | Мастерство не сертифицируется. Оно передаётся.</title>
+    <meta name="description"
+        content="Авторский онлайн-курс по программированию ЧПУ Fanuc. Токарная и Токарно-фрезерная обработка + Основы CAD/CAM.">
+
+    <!-- Favicon (Temporary SVG) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>匠</text></svg>">
+
+    <!-- Google Fonts: Inter for main text, Neucha, Philosopher & Great Vibes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Great+Vibes&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Neucha&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
+</head>
+
+<body>
+    <div class="techno-bg"></div>
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-kanji">匠</span>
+            <span class="logo-text">
+                <span class="logo-name">SENSEI</span>
+                <span class="logo-sub">CNC</span>
+            </span>
+        </div>
+        <nav class="nav">
+            <a href="#about">О курсе</a>
+            <a href="program.html">Программа</a>
+            <a href="schedule.html">Расписание</a>
+            <a href="about.html">Об авторе</a>
+            <a href="contacts.html">Контакты</a>
+            <div class="theme-toggle" id="themeToggle">
+                <span class="toggle-icon">☀</span>
+            </div>
+            <a href="#" class="btn btn-primary" id="loginBtn">Войти</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <!-- Лепестки сакуры -->
+            <canvas id="sakura-canvas"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;pointer-events:none;"></canvas>
+
+            <!-- Image in Top Right Corner -->
+            <div class="hero-image-wrapper">
+                <img src="img/sensei.png.png" alt="Владимир SENSEI CNC" class="hero-sensei-img">
+            </div>
+
+            <div class="hero-container">
+                <div class="hero-top-left">
+                    <h1 class="hero-title">
+                        <span class="line-1">Мастерство</span>
+                        <span class="line-2">не сертифицируется</span>
+                        <span class="line-3">оно передаётся.</span>
+                    </h1>
+                </div>
+
+                <div class="hero-bottom-center">
+                    <p class="hero-subtitle">Наладчик ЧПУ Fanuc: Токарная и Токарно-фрезерная обработка + Основы
+                        CAD/CAM</p>
+                    <div class="hero-actions">
+                        <a href="program.html" class="btn btn-sakura">Программа курса</a>
+                        <a href="about.html" class="btn btn-outline">Об авторе</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ИСТОРИЯ / ЦИТАТА ИНАБЫ ===== -->
+        <section class="history-section" id="history">
+            <!-- Видео патрона — верхний левый угол -->
+            <div class="hs-video-wrap">
+                <div class="hs-metal-frame">
+                    <video
+                        class="hs-chuck-video"
+                        src="https://res.cloudinary.com/ddqsidjec/video/upload/v1773407159/%D0%9F%D0%B0%D1%82%D1%80%D0%BE%D0%BD_%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D1%8F_inddaz.mp4"
+                        muted
+                        loop
+                        playsinline
+                        autoplay>
+                    </video>
+                </div>
+            </div>
+
+            <!-- Цитата — центр -->
+            <div class="hs-quote-wrap">
+                <blockquote class="hs-quote">
+                    <p class="hs-quote-text">
+                        <span class="hs-line hs-line-1">«В мире технологий нет места для "почти" или "примерно".</span>
+                        <span class="hs-line hs-line-2">Существует только абсолютная точность.</span>
+                        <span class="hs-line hs-line-3">Будущее принадлежит тем, кто понимает язык машин»</span>
+                    </p>
+                    <footer class="hs-quote-author">Seiuemon Inaba</footer>
+                </blockquote>
+            </div>
+
+            <!-- Фото Инабы — верхний правый угол -->
+            <div class="hs-photo-wrap">
+                <img src="img/inaba.png" alt="Seiuemon Inaba — основатель Fanuc" class="hs-inaba-photo">
+            </div>
+        </section>
+        <!-- ===== КОНЕЦ СЕКЦИИ ИСТОРИЯ ===== -->
+
+        <section id="about" class="section about-section">
+            <div class="container">
+                <h2 class="section-title">Что вы получите?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-number">1</div>
+                        <h3>"Хлеб наладчика"</h3>
+                        <p>Одна строка кода вместо пятидесяти — это реальность. Разберем циклы, которые делают 90%
+                            работы.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-number">2</div>
+                        <h3>Тотальный контроль</h3>
+                        <p>Вы будете нажимать CYCLE START с уверенностью, точно зная, куда пойдет инструмент.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-number">3</div>
+                        <h3>Полярная интерполяция</h3>
+                        <p>Как с помощью одной функции превратить сложную ось C в простую и понятную плоскость XY.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-number">4</div>
+                        <h3>Комплексный CAM</h3>
+                        <p>Вы сделаете первый шаг из "просто наладчика" в "технолога-программиста" (SolidWorks +
+                            SolidCAM).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="program" class="section program-section">
+            <div class="container">
+                <h2 class="section-title">Краткая программа</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Неделя 1: Базовая усиленная</h3>
+                            <p>Железобетонная база, безопасность, циклы, понимание логики стойки G-code.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Неделя 2: Закрепление + CAD/CAM</h3>
+                            <p>Переход от "калькулятора в голове" к современным методам (SolidWorks + SolidCAM).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-btn">
+                    <a href="program.html" class="btn btn-outline">Смотреть полную программу</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AUTH MODAL -->
+    <div id="authModal" class="auth-modal-overlay" aria-hidden="true">
+        <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+            <button class="auth-modal-close" id="authModalClose" aria-label="Закрыть">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="auth-modal-kanji" aria-hidden="true">匠</div>
+            <h2 class="auth-modal-title" id="authModalTitle">Вход в кабинет</h2>
+            <p class="auth-modal-subtitle">Введите ваш email — мы пришлём ссылку для входа</p>
+            <form class="auth-form" id="authForm" novalidate>
+                <div class="vanish-input-container">
+                    <input type="email" id="authEmail" class="vanish-input" autocomplete="email" required>
+                    <canvas id="vanishCanvas" class="vanish-canvas"></canvas>
+                    <span class="vanish-placeholder" id="vanishPlaceholder"></span>
+                    <button type="submit" class="vanish-submit-btn" id="authSubmitBtn" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+            <div class="auth-success" id="authSuccess" hidden>
+                <div class="auth-success-icon">✉️</div>
+                <p class="auth-success-title">Письмо отправлено!</p>
+                <p class="auth-success-text">Проверьте почту и перейдите по ссылке в письме. Ссылка действует 1 час.</p>
+            </div>
+            <div class="auth-divider"><span>Нет доступа?</span></div>
+            <p class="auth-note">Доступ к урокам выдаётся после оплаты курса. <a href="contacts.html">Связаться с
+                    автором →</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-kanji">匠</span>
+                <span>SENSEI CNC © 2026</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://t.me/+Jj6Uy-wDMfk1NGIy" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a href="https://vk.com/club228382060" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+                <a href="https://www.youtube.com/@Vladimir.rabota.vahta-cnc" target="_blank"
+                    rel="noopener noreferrer">YouTube</a>
+                <a href="https://max.ru/join/Tf6cZFKwXug4Sc4m2DnWaq3ucq9xrQ-Hix-pyVq8J2o" target="_blank"
+                    rel="noopener noreferrer">MAX</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Custom Scripts -->
+    <script src="auth.js?v=2"></script>
+    <script src="main.js?v=2"></script>
+
+    <!-- Sakura Petals — inline, гарантированная инициализация -->
+    <script>
+        window.addEventListener('load', function () {
+            const canvas = document.getElementById('sakura-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            // Используем размер секции hero, а не offsetWidth canvas
+            const hero = document.querySelector('.hero');
+            function resize() {
+                canvas.width = hero ? hero.offsetWidth : window.innerWidth;
+                canvas.height = hero ? hero.offsetHeight : window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            let petals = [];
+
+            function createPetal() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: -20,
+                    r: 5 + Math.random() * 7,
+                    speed: 0.6 + Math.random() * 1.3,
+                    drift: (Math.random() - 0.5) * 0.6,
+                    angle: Math.random() * Math.PI * 2,
+                    spin: (Math.random() - 0.5) * 0.03,
+                    alpha: 0.5 + Math.random() * 0.45,
+                    sway: Math.random() * Math.PI * 2,
+                    swaySpeed: 0.008 + Math.random() * 0.015,
+                };
+            }
+
+            // Заполняем начальный экран лепестками
+            for (let i = 0; i < 45; i++) {
+                const p = createPetal();
+                p.y = Math.random() * canvas.height;
+                petals.push(p);
+            }
+
+            function drawPetal(p) {
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                ctx.globalAlpha = p.alpha;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, p.r * 1.7, p.r, 0, 0, Math.PI * 2);
+                const g = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r * 1.7);
+                g.addColorStop(0, 'rgba(255,205,215, 0.95)');
+                g.addColorStop(0.6, 'rgba(255,170,188, 0.65)');
+                g.addColorStop(1, 'rgba(255,140,170, 0)');
+                ctx.fillStyle = g;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function tick() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (petals.length < 65 && Math.random() < 0.05) {
+                    petals.push(createPetal());
+                }
+
+                for (let i = petals.length - 1; i >= 0; i--) {
+                    const p = petals[i];
+                    p.sway += p.swaySpeed;
+                    p.x += p.drift + Math.sin(p.sway) * 0.6;
+                    p.y += p.speed;
+                    p.angle += p.spin;
+                    drawPetal(p);
+                    if (p.y > canvas.height + 30) petals.splice(i, 1);
+                }
+                requestAnimationFrame(tick);
+            }
+
+            tick();
+        });
+    </script>
+
+
+
+</body>
+
+</html>

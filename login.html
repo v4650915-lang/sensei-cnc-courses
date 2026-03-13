@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | TAKUMI CNC</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>匠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@200..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+    <div class="techno-bg"></div>
+
+    <div class="auth-container">
+        <a href="index.html" class="logo auth-logo mb-20 text-center" style="justify-content: center; display: flex;">
+            <span class="logo-kanji" style="font-size: 3rem;">匠</span>
+        </a>
+
+        <h2 class="text-center mb-20">Доступ к материалам</h2>
+        <p class="text-center mb-20" style="opacity: 0.8">Введите свой Email. Мы отправим вам магическую ссылку (Magic
+            Link) для входа без пароля.</p>
+
+        <form class="auth-form" id="loginForm">
+            <div class="form-group">
+                <input type="email" id="email" class="form-control" placeholder="Ваш Email" required>
+            </div>
+            <button type="submit" class="btn btn-sakura" style="width: 100%" id="submitBtn">Отправить ссылку</button>
+        </form>
+
+        <div id="authMessage" class="auth-message text-center mt-20" style="display: none;"></div>
+    </div>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const messageEl = document.getElementById('authMessage');
+
+            if (!window.supabaseClient) {
+                messageEl.textContent = 'Ключи Supabase не настроены. Для работы авторизации добавьте ключи в auth.js';
+                messageEl.style.color = '#ff6b6b';
+                messageEl.style.display = 'block';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+
+            try {
+                const { data, error } = await window.supabaseClient.auth.signInWithOtp({
+                    email: email,
+                    options: {
+                        shouldCreateUser: true,
+                        // URL, на который Supabase редиректит после клика в письме:
+                        emailRedirectTo: window.location.origin + '/dashboard.html'
+                    }
+                });
+
+                if (error) throw error;
+
+                messageEl.textContent = 'Ссылка отправлена! Проверьте вашу почту.';
+                messageEl.style.color = '#51cf66';
+                messageEl.style.display = 'block';
+            } catch (error) {
+                messageEl.textContent = 'Ошибка: ' + error.message;
+                messageEl.style.color = '#ff6b6b';
+                messageEl.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить ссылку';
+            }
+        });
+    </script>
+</body>
+
+</html>

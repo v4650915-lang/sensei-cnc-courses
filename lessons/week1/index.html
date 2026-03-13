@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок: Неделя 1 | SENSEI CNC</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>匠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@200..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../style.css">
+
+    <!-- Защита роута (Если нет сессии -> на главную, если нет has_access -> в dashboard) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../auth.js"></script>
+</head>
+
+<body>
+    <div class="techno-bg"></div>
+
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <span class="logo-kanji">匠</span>
+            <span class="logo-text">SENSEI CNC</span>
+        </a>
+        <nav class="nav">
+            <a href="../../dashboard.html">Личный кабинет</a>
+            <a href="#" class="btn btn-outline" id="logoutBtn">Выйти</a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-30">
+        <section class="section">
+            <div class="container">
+                <h1 class="page-title">Неделя 1: Базовая усиленная</h1>
+                <p class="page-subtitle mb-20">Материалы первой недели курса. Видеоуроки, конспекты и задания.</p>
+
+                <div class="program-details">
+                    <div class="feature-card mb-20">
+                        <h3>День 1. Структура программы</h3>
+                        <p>Видеозапись трансляции скоро появится здесь.</p>
+                        <a href="#" class="btn btn-sakura mt-20">Смотреть урок</a>
+                    </div>
+
+                    <div class="feature-card mb-20">
+                        <h3>День 2. Компенсация радиуса</h3>
+                        <p>Видеозапись трансляции скоро появится здесь.</p>
+                        <a href="#" class="btn btn-outline mt-20">Смотреть урок</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn && window.supabaseClient) {
+                logoutBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await window.supabaseClient.auth.signOut();
+                    window.location.href = '../../index.html';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

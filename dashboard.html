@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | SENSEI CNC</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>匠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@200..800&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Jitsi Meet / JaaS 8x8 External API -->
+    <script src="https://8x8.vc/vpaas-magic-cookie-ca80f03cabc14177ba79e6a00bfccd93/external_api.js"></script>
+</head>
+
+<body>
+    <div class="techno-bg"></div>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-kanji">匠</span>
+            <span class="logo-text">
+                <span class="logo-name">SENSEI</span>
+                <span class="logo-sub">CNC</span>
+            </span>
+        </a>
+        <nav class="nav">
+            <span id="userEmailDisplay" style="font-size:0.8rem;opacity:0.5;"></span>
+            <a href="#" class="btn btn-outline" id="logoutBtn">Выйти</a>
+        </nav>
+    </header>
+
+    <main class="page-content" style="padding-top: 100px;">
+        <div class="container">
+            <h1 class="page-title">Личный кабинет</h1>
+
+            <!-- ═══ ВКЛАДКи ════════════════════════════════════════════════════ -->
+            <div class="dashboard-tabs" id="dashTabs">
+                <button class="dash-tab active" data-tab="lessons">📚 Мои уроки</button>
+                <button class="dash-tab" data-tab="live">
+                    <span id="live-badge" class="live-badge" style="display:none;">
+                        <span class="live-dot"></span> В ЭФИРЕ
+                    </span>
+                    🔴 Прямой эфир
+                </button>
+            </div>
+
+            <!-- ═══ ВКЛАДКА: МОИ УРОКИ ════════════════════════════════════════ -->
+            <div class="dash-panel" id="panel-lessons">
+                <div id="accessStatusContainer" class="mt-20">
+                    <div class="feature-card" style="border-color: #ffcc00; background: rgba(255, 204, 0, 0.05);">
+                        <h3 style="color: #ffcc00;">Проверка доступа...</h3>
+                        <p>Ожидайте загрузки.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ ВКЛАДКА: ПРЯМОЙ ЭФИР ══════════════════════════════════════ -->
+            <div class="dash-panel" id="panel-live" style="display:none;">
+
+                <!-- Панель администратора (скрыта по умолчанию) -->
+                <div id="admin-live-panel" class="admin-live-panel">
+                    <div class="admin-status-row">
+                        <span class="admin-label">⚙️ Панель администратора</span>
+                        <span id="monitor-status-text" class="monitor-status-text">ОЖИДАНИЕ</span>
+                    </div>
+                    <button id="btn-live-toggle" class="btn-live-toggle">
+                        🔴 Начать трансляцию
+                    </button>
+                </div>
+
+                <!-- ═══ "ПРОМЫШЛЕННЫЙ МОНИТОР" ════════════════════════════════ -->
+                <div class="tv-monitor">
+                    <!-- Заклёпки -->
+                    <div class="tv-rivet tv-rivet--tl"></div>
+                    <div class="tv-rivet tv-rivet--tr"></div>
+                    <div class="tv-rivet tv-rivet--bl"></div>
+                    <div class="tv-rivet tv-rivet--br"></div>
+
+                    <!-- Шильдик -->
+                    <div class="tv-label">
+                        <span class="tv-label-brand">SENSEI CNC</span>
+                        <span class="tv-label-model">MASTERCLASS MONITOR — MODEL 2026</span>
+                    </div>
+
+                    <!-- Экран -->
+                    <div class="tv-screen">
+                        <!-- Индикаторы верхней панели -->
+                        <div class="tv-screen-topbar">
+                            <span class="tv-indicator tv-indicator--power"></span>
+                            <span class="tv-indicator tv-indicator--signal" id="tv-signal-dot"></span>
+                            <span class="tv-screen-label">SENSEI_CNC_LIVE / CH.01</span>
+                        </div>
+
+                        <!-- Заглушка (показывается когда нет трансляции) -->
+                        <div id="tv-standby" class="tv-standby">
+                            <div class="tv-standby-icon">⚙</div>
+                            <div class="tv-standby-title">Станок на прогреве</div>
+                            <div class="tv-standby-sub">Мастер скоро выйдет в эфир</div>
+                            <div class="tv-standby-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+
+                        <!-- Контейнер Jitsi (скрыт когда нет трансляции) -->
+                        <div id="jitsi-container" class="jitsi-container" style="display:none;"></div>
+                    </div>
+                </div>
+
+            </div><!-- /panel-live -->
+
+            <!-- ─── Кнопка Кинотеатр ─── -->
+            <div id="theater-btn-wrap" style="text-align:right; margin-top:0.75rem; display:none;">
+                <button id="btn-theater" class="btn-theater">
+                    <span class="btn-theater-icon">⛶</span>
+                    <span class="btn-theater-label">Кинотеатр</span>
+                </button>
+            </div>
+
+            <!-- ─── Плавающий контрол админа поверх fullscreen ─── -->
+            <div id="tv-admin-float" class="tv-admin-float">
+                <button id="btn-live-toggle-float" class="btn-live-toggle" style="font-size:0.82rem;padding:0.4rem 0.9rem;">
+                    🔴 Начать трансляцию
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Auth + Live модули -->
+    <script src="auth.js"></script>
+    <script src="live.js"></script>
+
+    <script>
+        // ── TABS ───────────────────────────────────────────────────────────────
+        document.querySelectorAll('.dash-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+                document.querySelectorAll('.dash-tab').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.dash-panel').forEach(p => p.style.display = 'none');
+                btn.classList.add('active');
+                document.getElementById('panel-' + tab).style.display = 'block';
+
+                // Показываем кнопку Кинотеатр только на вкладке эфира
+                const theaterWrap = document.getElementById('theater-btn-wrap');
+                if (theaterWrap) theaterWrap.style.display = (tab === 'live') ? 'block' : 'none';
+            });
+        });
+
+        // ── КИНОТЕАТР (fullscreen overlay) ────────────────────────────────────
+        (function initTheater() {
+            const btn        = document.getElementById('btn-theater');
+            const monitor    = document.querySelector('.tv-monitor');
+            const label      = document.querySelector('.btn-theater-label');
+            const icon       = document.querySelector('.btn-theater-icon');
+            const adminFloat = document.getElementById('tv-admin-float');
+            if (!btn || !monitor) return;
+
+            function enterTheater() {
+                monitor.classList.add('tv-monitor--fullscreen');
+                document.body.style.overflow = 'hidden';
+                btn.classList.add('is-active');
+                label.textContent = '↩ Вернуться в кабинет';
+                icon.textContent  = '✕';
+                // Админский блок — показывается если пользователь is_admin
+                if (window.currentProfile?.is_admin && adminFloat) {
+                    adminFloat.classList.add('is-visible');
+                    syncAdminFloatBtn();
+                }
+            }
+
+            function exitTheater() {
+                monitor.classList.remove('tv-monitor--fullscreen');
+                document.body.style.overflow = '';
+                btn.classList.remove('is-active');
+                label.textContent = 'Кинотеатр';
+                icon.textContent  = '⛶';
+                if (adminFloat) adminFloat.classList.remove('is-visible');
+            }
+
+            // Синхронизация плавающей кнопки с главной
+            function syncAdminFloatBtn() {
+                const mainBtn  = document.getElementById('btn-live-toggle');
+                const floatBtn = document.getElementById('btn-live-toggle-float');
+                if (!mainBtn || !floatBtn) return;
+                floatBtn.textContent  = mainBtn.textContent;
+                floatBtn.className    = mainBtn.className;
+                floatBtn.style.cssText = 'font-size:0.82rem;padding:0.4rem 0.9rem;';
+                // перенаправляем клик на главную кнопку
+                floatBtn.onclick = () => mainBtn.click();
+            }
+
+            btn.addEventListener('click', () => {
+                monitor.classList.contains('tv-monitor--fullscreen') ? exitTheater() : enterTheater();
+            });
+
+            // Escape выходит из режима кинотеатра
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && monitor.classList.contains('tv-monitor--fullscreen')) exitTheater();
+            });
+
+            // Обновляем плавающую кнопку при клике главной
+            document.getElementById('btn-live-toggle')?.addEventListener('click', () => {
+                if (monitor.classList.contains('tv-monitor--fullscreen')) {
+                    setTimeout(syncAdminFloatBtn, 200);
+                }
+            });
+        })();
+
+        // ── MAIN DASHBOARD LOGIC ───────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            // Надёжное ожидание Supabase CDN (polling, до 3 секунд)
+            const sbClient = await new Promise((resolve) => {
+                let attempts = 0;
+                const check = () => {
+                    if (window.supabaseClient) {
+                        resolve(window.supabaseClient);
+                    } else if (window.supabase?.createClient) {
+                        const SUPABASE_URL = 'https://vvrtzaduazxoualvtayy.supabase.co';
+                        const SUPABASE_KEY = 'sb_publishable_NXcx4-Xg3q67UTU0eSX8kA_wwgzPULz';
+                        window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                        resolve(window.supabaseClient);
+                    } else if (attempts++ < 30) {
+                        setTimeout(check, 100);
+                    } else {
+                        resolve(null);
+                    }
+                };
+                check();
+            });
+
+            if (!sbClient) {
+                console.warn('[Dashboard] supabaseClient не найден — демо-режим');
+                document.getElementById('accessStatusContainer').innerHTML = `
+                    <div class="feature-card" style="border-color:#ffcc00;">
+                        <h3 style="color:#ffcc00;">⚠️ Supabase не подключён</h3>
+                        <p>Проверьте подключение и перезагрузите страницу.</p>
+                    </div>`;
+                return;
+            }
+
+            console.log('[Dashboard] ✅ supabaseClient готов');
+
+            // ── Проверяем сессию
+            const { data: { session }, error: sessionErr } = await sbClient.auth.getSession();
+            if (sessionErr) console.error('[Dashboard] Ошибка getSession:', sessionErr);
+
+            if (!session) {
+                console.log('[Dashboard] Сессия не найдена → редирект на главную');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const userId    = session.user.id;
+            const userEmail = session.user.email;
+            console.log('[Dashboard] ✅ Сессия найдена. UserID:', userId, '| Email:', userEmail);
+            document.getElementById('userEmailDisplay').textContent = userEmail;
+
+            // ── Запрашиваем профиль с подробным логом ошибки
+            let profile = null;
+            const { data: profileData, error: profileErr } = await sbClient
+                .from('profiles')
+                .select('has_access, display_name, is_admin')
+                .eq('id', userId)
+                .single();
+
+            if (profileErr) {
+                // Самые частые причины:
+                // PGRST116 = строка с таким id не найдена
+                // 42501    = RLS блокирует доступ
+                console.error('[Dashboard] ❌ Ошибка чтения profiles:',
+                    profileErr.code, '—', profileErr.message);
+                console.info('[Dashboard] Проверьте:', [
+                    '1. В таблице profiles есть строка с id =', userId,
+                    '2. RLS Policy: "Users can read own profile" (auth.uid() = id)',
+                ].join(' '));
+            } else {
+                profile = profileData;
+                console.log('[Dashboard] ✅ Профиль получен:', profile);
+            }
+
+            // Гарантируем что profile существует с дефолтными полями
+            if (!profile) profile = { has_access: false, is_admin: false, display_name: null };
+            profile.email = userEmail;
+            if (!profile.display_name) profile.display_name = userEmail.split('@')[0];
+
+            console.log('[Dashboard] has_access =', profile.has_access, '| is_admin =', profile.is_admin);
+
+            // Сохраняем глобально для других скриптов
+            window.currentProfile = profile;
+
+            // ── БЛОК ДОСТУПА К УРОКАМ ─────────────────────────────────
+            const accessContainer = document.getElementById('accessStatusContainer');
+            if (profile.has_access) {
+                accessContainer.innerHTML = `
+                    <div class="feature-card" style="border-color:#51cf66;">
+                        <h3 style="color:#51cf66;">✅ Доступ активен</h3>
+                        <p>Добро пожаловать на курс, ${profile.display_name}!</p>
+                        <div class="mt-20" style="display:flex;gap:1rem;flex-wrap:wrap;">
+                            <a href="lessons/week1/index.html" class="btn btn-outline" style="border-color:#51cf66;color:#51cf66;">Материалы 1 недели</a>
+                            <a href="lessons/week2/index.html" class="btn btn-outline" style="border-color:#51cf66;color:#51cf66;">Материалы 2 недели</a>
+                        </div>
+                    </div>`;
+            } else {
+                accessContainer.innerHTML = `
+                    <div class="feature-card" style="border-color:var(--accent-color);">
+                        <h3 style="color:var(--accent-color);">Доступ к материалам закрыт</h3>
+                        <p>Ваш аккаунт зарегистрирован, но обучение ещё не активировано.</p>
+                        <p class="mt-20" style="opacity:0.6;">Ожидайте подтверждения от преподавателя.</p>
+                    </div>`;
+            }
+
+            // ── LIVE-СЕКЦИЯ ───────────────────────────────────────────
+            if (window.liveModule) {
+                console.log('[Dashboard] Запускаем live-модуль...');
+                await window.liveModule.initLiveSection(sbClient, profile);
+            } else {
+                console.error('[Dashboard] ❌ liveModule не найден! Проверьте подключение live.js');
+            }
+
+            // ── ВЫХОД ─────────────────────────────────────────────────
+            document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+                e.preventDefault();
+                await sbClient.auth.signOut();
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+
+</html>
